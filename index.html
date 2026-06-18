@@ -8,12 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 
-<audio id="bg-music" autoplay loop>
-    <source src="wimy.mp3" type="audio/mpeg">
-</audio>
 
 <script>
 window.onload = () => {
+
+        document.addEventListener("click", () => {
+        document.getElementById("bg-music").play();
+    }, { once: true });
 
 
     // ===== ELEMENTS =====
@@ -37,10 +38,6 @@ window.onload = () => {
     gift.classList.add("gift");
     gift.style.display = "none";
     windowContent.appendChild(gift);
-
-    window.addEventListener("click", () => {
-    document.getElementById("bg-music").play();
-}, { once: true });
 
     // ===== LETTER PAGES =====
     const pages = [
@@ -172,6 +169,10 @@ na mahaal na mahaal kitaa at ang isang cutiee patooie na tulad mo ay dapat lang 
 </script>
 
 <body>
+
+    <audio id="bg-music" autoplay loop>
+    <source src="wimy.mp3" type="audio/mpeg">
+</audio>
 
 <div id="letterOverlay" class="letter-overlay">
     <div class="letter-container">
