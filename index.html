@@ -15,6 +15,7 @@
 <script>
 window.onload = () => {
 
+
     // ===== ELEMENTS =====
     const noWrapper = document.querySelector('.no-wrapper');
     const windowContent = document.querySelector('.window-content');
@@ -36,6 +37,10 @@ window.onload = () => {
     gift.classList.add("gift");
     gift.style.display = "none";
     windowContent.appendChild(gift);
+
+    window.addEventListener("click", () => {
+    document.getElementById("bg-music").play();
+}, { once: true });
 
     // ===== LETTER PAGES =====
     const pages = [
