@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For my Jagi</title>
+    <link rel="stylesheet" href="cute.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+
+<audio id="bg-music" autoplay loop>
+    <source src="wimy.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+window.onload = () => {
+
+    // ===== ELEMENTS =====
+    const noWrapper = document.querySelector('.no-wrapper');
+    const windowContent = document.querySelector('.window-content');
+
+    const yesBtn = document.querySelector('.yes-btn');
+    const letterTitle = document.getElementById('letter-title');
+    const letterCat = document.getElementById('letter-cat');
+    const letterButtons = document.getElementById('letter-buttons');
+    const finalText = document.getElementById('final-text');
+
+    const overlay = document.getElementById("letterOverlay");
+    const closeLetter = document.getElementById("closeLetter");
+    const typewriter = document.getElementById("typewriter");
+    const nextBtn = document.getElementById("nextBtn");
+
+    // ===== GIFT =====
+    const gift = document.createElement("img");
+    gift.src = "gift.png";
+    gift.classList.add("gift");
+    gift.style.display = "none";
+    windowContent.appendChild(gift);
+
+    // ===== LETTER PAGES =====
+    const pages = [
+`Hi babyy, kamustaa?
+it's been 2 months and 10 days since we started talking.`,
+
+`hindi ko alam kung panong way ko sasabihin pero sobrang saya ko
+kasi nakilala ko ang isang cutie pie na katulad mo >//<`,
+
+`At first hindi talaga me sigurado sa nararamdaman ko.
+All I know is that I'm interested in you.`,
+
+`But as the days go by na magkausap us, I realize.. I have really fallen in love with you.`,
+
+`the way you think, the way you see things, the way you exist, and the way you love. 
+I really admire all of that.`,
+
+`Words are not enough talaga to describe kung gano ka ka special for me kahit rebisco hindi kaya`,
+
+`I just wanted to say thankyou for always being there for me, I really really appreciate it.`,
+
+`You make every day feel so special and better, pinapagaan mo talaga araw ko kahit lagi mo akong inaasar.`,
+
+`You know... I love exactly everything about you, no need to be specific walang lusot kahit kaluluwa mo.`,
+
+`ever since dumating ka sa buhay ko, I feel so much calmer and at peace
+and I hope you feel the same hehe.`,
+
+`And again gusto kong malaman mo na I'm always here for you, 
+kung kailangan mo ng masasandalan nandito lang ako`,
+
+`I know na mahirap talaga ang pagdadala ng buhay,
+pero sana lagi mong iisipin baby na kahit mahirap masaya pa rin hihi`,
+
+`alam mo baby proud na proud talaga ko sa'yo kasi kinakaya mo lahat,
+pero kahit ganon wag i-pressure masyado ang sarili okii`,
+
+`lagi ko naman sinasabi na pag may problema ka magsabi ka rin hehe,
+hindi ko man malunasan pero baka maka help baby para gumaan ng konti.`,
+
+`Lagi mong tatandaan jagi my baby, 
+na mahaal na mahaal kitaa at ang isang cutiee patooie na tulad mo ay dapat lang mahalin ng sobraa pa sa sobraa`
+    ];
+
+    let currentPage = 0;
+    let isTyping = false;
+
+    // ===== TYPEWRITER =====
+    function typeWriter(text, element, speed = 40, callback) {
+        element.textContent = "";
+        let i = 0;
+        isTyping = true;
+
+        function typing() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(typing, speed);
+            } else {
+                isTyping = false;
+                if (callback) callback();
+            }
+        }
+
+        typing();
+    }
+
+    // ===== NO BUTTON MOVE =====
+    noWrapper.addEventListener('mouseenter', () => {
+        const maxX = windowContent.clientWidth - noWrapper.offsetWidth;
+        const maxY = windowContent.clientHeight - noWrapper.offsetHeight;
+
+        noWrapper.style.left = Math.random() * maxX + 'px';
+        noWrapper.style.top = Math.random() * maxY + 'px';
+    });
+
+    // ===== YES CLICK =====
+    yesBtn.addEventListener("click", () => {
+
+        letterTitle.style.display = "none";
+        letterCat.style.display = "none";
+        letterButtons.style.display = "none";
+
+        finalText.style.display = "block";
+
+        gift.style.display = "block";
+        gift.classList.add("pop", "float");
+    });
+
+    // ===== OPEN LETTER =====
+    gift.addEventListener("click", () => {
+
+        overlay.classList.add("show");
+
+        currentPage = 0;
+
+        typeWriter(pages[currentPage], typewriter, 40, () => {
+            nextBtn.classList.add("show");
+        });
+    });
+
+    // ===== NEXT BUTTON =====
+    nextBtn.addEventListener("click", () => {
+
+        if (isTyping) return;
+
+        currentPage++;
+
+        if (currentPage < pages.length) {
+
+            nextBtn.classList.remove("show");
+
+            typeWriter(pages[currentPage], typewriter, 40, () => {
+                nextBtn.classList.add("show");
+            });
+
+        } else {
+            nextBtn.classList.remove("show");
+            typeWriter("Yun lang hihi dumaan lang, I hope baby kahit hindi ako magaling sa words napasaya kita hihi.", typewriter, 40);
+        }
+    });
+
+    // ===== CLOSE LETTER =====
+    closeLetter.addEventListener("click", () => {
+        overlay.classList.remove("show");
+    });
+
+};
+</script>
+
+<body>
+
+<div id="letterOverlay" class="letter-overlay">
+    <div class="letter-container">
+        <img src="paper.png" class="letter-paper">
+        <img src="next.png" id="nextBtn" class="next-btn">
+
+        <div class="letter-message">
+            <p id="typewriter"></p>
+        </div>
+
+        <img src="close.png" id="closeLetter" class="close-btn">
+    </div>
+</div>
+
+<div class="window-wrapper">
+    <img src="cutiepurple.png" class="window-img" />
+
+    <div class="window-content">
+        <h1 id="letter-title">Will you be my softie cutiee <br> patotiee baby forever?</h1>
+
+        <img src="catto.gif" class="cat" id="letter-cat" />
+
+        <div class="buttons" id="letter-buttons">
+            <img src="yes.png" class="btn yes-btn" alt="Yes" />
+
+            <div class="no-wrapper">
+                <img src="no.png" class="btn no-btn" alt="No" />
+            </div>
+        </div>
+
+        <p id="final-text" class="final-text" style="display: none">
+            I knew you were going to choose yes! <br>
+            <strong>Oh a letter for you:</strong> Click it!
+        </p>
+    </div>
+</div>
+
+</body>
+</html>
